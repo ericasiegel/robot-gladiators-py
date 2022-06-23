@@ -1,16 +1,60 @@
+import random
 
-def fight():
+class Player:
+    def __init__(self, player_name):
+        self.name = player_name.upper()
+    health = 100
+    attack = 10
+    money = 10
+
+class Enemy:
+    def __init__(self, enemy_name):
+        self.name = enemy_name
+        self.health = random.randint(20, 50)
+        self.attack = random.randint(10, 20)
+        
+class Game:
+    def player_attack(self):
+        enemy.health -= player.attack
+    def enemy_attack(self):
+        player.health -= enemy.attack
+    def skip(self):
+        player_money -= 2
+    def store(self):
+        pass
+
+def play():
     print('Welcome to Robot Gladiators!')
     print('')
-        
     player_name = input("What is your robot's name? ")
-    player_health = 100
-    player_attack = 10
-    player_money = 10
-    print('')
+    player = Player(player_name)
+    # print(player.name)
+    print(f"{player.name} = Health: {player.health}, Attack: {player.attack}, $: {player.money}")
+
+    enemy_robots = ['Roborto', 'Amy Android', 'Robo Trumble']
+    enemy_name = enemy_robots[0]
+    # print(enemy_name)
+    enemy = Enemy(enemy_name)
+    print(f"{enemy.name} = Health: {enemy.health}, Attack: {enemy.attack}")
+
+
+
+
+play()
+   
+   
+def fight():
+    # print('Welcome to Robot Gladiators!')
+    # print('')
+        
+    # player_name = input("What is your robot's name? ")
+    # player_health = 100
+    # player_attack = 10
+    # player_money = 10
+    # print('')
     
-    print(f"{player_name} = Health: {player_health}, Attack: {player_attack}, $: {player_money}")
-    print('')
+    # print(f"{player_name} = Health: {player_health}, Attack: {player_attack}, $: {player_money}")
+    # print('')
     
     prompt_fight = input("Would you like to FIGHT or SKIP this battle? Enter 'Fight' or 'Skip' to choose. ")
     print('')
@@ -57,6 +101,4 @@ def fight():
     else:
         print('You need to choose a valid option. Try again!')
     
-fight()
-# print(f"{enemy_name} now has {enemy_health} health remaining.")
-# print(f"{robot_name} now has {robot_health} health remaining.")
+# fight()
