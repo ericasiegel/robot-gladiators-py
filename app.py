@@ -8,7 +8,7 @@ player = {
 }
 
 enemy = {
-    'name': 'Test Robot',
+    'name': '',
     'health': random.randint(19, 51),
     'attack': random.randint(9, 21),
 }
@@ -52,13 +52,18 @@ def skip():
     
     
 def play():
+    enemy_names = ['E Robot 1', 'E Robot 2', 'E Robot 3',]
     player_name = input("What is your robot's name? ")
     print('')
     player['name'] = player_name.upper()
     print(f"Welcome to Robot Gladiators {player_name.upper()}!")
-        
-    while player['health'] > 0:
+    
+    for name in enemy_names:
+        enemy['name'] = name
         fight()
+        
+    # while player['health'] > 0:
+    #     fight(enemy)
         
         
 play()
