@@ -38,7 +38,17 @@ def fight():
         print('')
 
 def skip():
-    print('fight skipped')
+    confirm_skip = input('Are you sure you want to quit? (YES or NO) ')
+    print('')
+    if 'yes' in confirm_skip.lower():
+        player['money'] = player['money'] - 2
+        print(f"{player['name']} skipped the fight. {player['name']} has lost $2 and now has ${player['money']}")
+        print('')
+    elif 'no' in confirm_skip.lower():
+        fight()
+    else:
+        print('Please choose YES or NO')
+        print('')
     
     
 def play():
