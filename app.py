@@ -1,3 +1,4 @@
+from operator import indexOf
 import random
 
 player = {
@@ -22,6 +23,7 @@ def fight():
             if enemy['health'] <= 0:
                 print(f"{player['name']} attacks {enemy['name']}.")
                 print(f"{enemy['name']} has died!")
+                print('')
                 break
             else:
                 print(f"{player['name']} attacks {enemy['name']}. {enemy['name']} has {enemy['health']} health remaining")
@@ -62,15 +64,19 @@ def play():
     player['name'] = player_name.upper()
     print(f"Welcome to Robot Gladiators {player_name.upper()}!")
     
-    for name in enemy_names:
+    for index, name in enumerate(enemy_names):
         enemy['name'] = name
         enemy['health'] = random.randint(19, 51)
-
-        print(f"PLAYER: {player['name']}, health = {player['health']}, money = ${player['money']}")
-        print(f"ENEMY: {enemy['name']}, health = {enemy['health']}")
-        print('')
         
-        fight()
+        if player['health'] > 0:
+            print(f"ROUND {index + 1}")
+            print(f"PLAYER: {player['name']}, health = {player['health']}, money = ${player['money']}")
+            print(f"ENEMY: {enemy['name']}, health = {enemy['health']}")
+            print('')
+            
+            fight()
+        else:
+            print('You have lost your robot in battle! GAME OVER!')
             
 
 
