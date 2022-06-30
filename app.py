@@ -26,8 +26,9 @@ def fight(index):
             enemy['health'] -= player['attack']
             if enemy['health'] <= 0:
                 print(f"{player['name']} attacks {enemy['name']}.")
-                print(f"{enemy['name']} has died!")
+                print(f"{enemy['name']} has died! {player['name']} has won $5!")
                 print('')
+                player['money'] += 5
                 break
             else:
                 print(f"{player['name']} attacks {enemy['name']}. {enemy['name']} has {enemy['health']} health remaining")
