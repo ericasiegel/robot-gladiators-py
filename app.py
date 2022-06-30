@@ -51,20 +51,51 @@ def fight():
             else:
                 print('Please choose YES or NO')
                 print('')
-        
         else:
             print('Please choose FIGHT or SKIP')
             print('')
+            
+        
 
+def endgame():
+    print("The game has ended. Let's see how you did:")
+    print('')
+    # if player is still alive
+    if player['health'] > 0:
+        print(f"Congratulations, you survived!")
+        print(f"Your remaining health is {player['health']} and you have ${player['money']}")
+        print('')
+        print('GAME OVER')
+        print('')
+    else:
+    # if player has died
+        print(f"Your robot {player['name']} has died in battle.")
+        print('')
+        print('GAME OVER')
+        print('')
+    
+    play_again = input('Would you like to play again? YES or NO ')
+    if 'yes' in play_again.lower():
+        player['attack'] = 10
+        player['health'] = 100
+        player['money'] = 10
+        play()
+    else:
+        print('')
+        print('Thank you for playing Robot Gladiators!')
 
 def play():
+    print(f"Welcome to Robot Gladiators!")
+    print('')
     enemy_names = ['E Robot 1', 'E Robot 2', 'E Robot 3',]
     player_name = input("What is your robot's name? ")
     print('')
     player['name'] = player_name.upper()
-    print(f"Welcome to Robot Gladiators {player_name.upper()}!")
+    print(f"Lets start {player_name.upper()}!")
+    print('')
     
     for index, name in enumerate(enemy_names):
+        # reset enemy stats
         enemy['name'] = name
         enemy['health'] = random.randint(19, 51)
         
@@ -77,7 +108,7 @@ def play():
             fight()
         else:
             print('You have lost your robot in battle! GAME OVER!')
-            
-
+    
+    endgame()
 
 play()
