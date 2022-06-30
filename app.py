@@ -4,7 +4,7 @@ player = {
     'name': '',
     'health': 100,
     'attack': 10,
-    'money':10
+    'money':10,
 }
 
 enemy_names = ['E Robot 1', 'E Robot 2', 'E Robot 3']
@@ -23,7 +23,7 @@ def fight(index):
         prompt_fight = input('Would you like to FIGHT or SKIP? ')
         print('')
         if 'fight' in prompt_fight.lower():
-            enemy['health'] = enemy['health'] - player['attack']
+            enemy['health'] -= player['attack']
             if enemy['health'] <= 0:
                 print(f"{player['name']} attacks {enemy['name']}.")
                 print(f"{enemy['name']} has died!")
@@ -32,7 +32,7 @@ def fight(index):
             else:
                 print(f"{player['name']} attacks {enemy['name']}. {enemy['name']} has {enemy['health']} health remaining")
 
-            player['health'] = player['health'] - enemy['attack']
+            player['health'] -= enemy['attack']
             if player['health'] <= 0:
                 print(f"{enemy['name']} attacks {player['name']}.")
                 print(f"{player['name']} has died!")
@@ -46,7 +46,7 @@ def fight(index):
             confirm_skip = input('Are you sure you want to quit? (YES or NO) ')
             print('')
             if 'yes' in confirm_skip.lower():
-                player['money'] = player['money'] - 2
+                player['money'] -= 2
                 print(f"{player['name']} skipped the fight. {player['name']} has lost $2 and now has ${player['money']}")
                 print('')
                 break
@@ -67,20 +67,20 @@ def shop():
     print('')
     match store_choice.upper():
         case 'REFILL':
-            if player['money'] > 6:
+            if player['money'] >= 6:
                 print(f"Refilling {player['name']}'s health by 20 for $6")
                 print('')
-                player['health'] = player['health'] + 20
-                player['money'] = player['money'] - 6
+                player['health'] += 20
+                player['money'] -= 6
             else:
                 print("You don't have enough money!")
                 shop()
         case 'UPGRADE':
-            if player['money'] > 7:
+            if player['money'] >= 7:
                 print(f"Upgrading {player['name']}'s attack by 6 for $7")
                 print('')
-                player['health'] = player['attack'] + 20
-                player['money'] = player['money'] - 7
+                player['health'] += 20
+                player['money'] -= 7
             else:
                 print("You don't have enough money!")
                 shop()
