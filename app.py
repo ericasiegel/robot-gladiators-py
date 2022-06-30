@@ -1,4 +1,3 @@
-from operator import indexOf
 import random
 
 player = {
@@ -8,13 +7,18 @@ player = {
     'money':10
 }
 
+enemy_names = ['E Robot 1', 'E Robot 2', 'E Robot 3']
 enemy = {
     'name': '',
     'health': 0,
     'attack': random.randint(9, 21),
 }
         
-def fight():
+def fight(index):
+    print(f"ROUND {index + 1}")
+    print(f"PLAYER: {player['name']}, health = {player['health']}, money = ${player['money']}")
+    print(f"ENEMY: {enemy['name']}, health = {enemy['health']}")
+    print('')
     while enemy['health'] > 0 and player['health'] > 0:
         prompt_fight = input('Would you like to FIGHT or SKIP? ')
         print('')
@@ -47,7 +51,7 @@ def fight():
                 print('')
                 break
             elif 'no' in confirm_skip.lower():
-                fight()
+                fight(index)
             else:
                 print('Please choose YES or NO')
                 print('')
@@ -55,6 +59,38 @@ def fight():
             print('Please choose FIGHT or SKIP')
             print('')
             
+def shop():
+    print('Entered Shop')
+    print(f"You currently have $player['money']")
+    print('')     
+    store_choice = input("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice. ") 
+    print('')
+    match store_choice.upper():
+        case 'REFILL':
+            if player['money'] > 6:
+                print(f"Refilling {player['name']}'s health by 20 for $6")
+                print('')
+                player['health'] = player['health'] + 20
+                player['money'] = player['money'] - 6
+            else:
+                print("You don't have enough money!")
+                shop()
+        case 'UPGRADE':
+            if player['money'] > 7:
+                print(f"Upgrading {player['name']}'s attack by 6 for $7")
+                print('')
+                player['health'] = player['attack'] + 20
+                player['money'] = player['money'] - 7
+            else:
+                print("You don't have enough money!")
+                shop()
+        case 'LEAVE':
+            print('Leaving Store')
+            print('')
+        case _:
+            print('please choose a valid option')
+            print('')
+            shop()
         
 
 def endgame():
@@ -87,7 +123,7 @@ def endgame():
 def play():
     print(f"Welcome to Robot Gladiators!")
     print('')
-    enemy_names = ['E Robot 1', 'E Robot 2', 'E Robot 3',]
+    
     player_name = input("What is your robot's name? ")
     print('')
     player['name'] = player_name.upper()
@@ -100,12 +136,12 @@ def play():
         enemy['health'] = random.randint(19, 51)
         
         if player['health'] > 0:
-            print(f"ROUND {index + 1}")
-            print(f"PLAYER: {player['name']}, health = {player['health']}, money = ${player['money']}")
-            print(f"ENEMY: {enemy['name']}, health = {enemy['health']}")
-            print('')
+            fight(index)
+            if player['health'] > 0 and index < (len(enemy_names) - 1):
+                go_shop = input('The fight is over. visit the store before the next round? YES or NO ')
+                if 'yes' in go_shop.lower():
+                    shop()
             
-            fight()
         else:
             print('You have lost your robot in battle! GAME OVER!')
     
